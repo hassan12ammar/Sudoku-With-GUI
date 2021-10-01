@@ -9,13 +9,14 @@ import tkinter as tk
 from tkinter.constants import DISABLED, TOP
 import json
 
+boards_file = open("./boards.json")
+boards = json.load(boards_file)
+boards_file.close()
+boards_length = len(boards)
+
 
 def get_board_solution(level):
-    boards_file = open("./boards.json")
-    boards = json.load(boards_file)
-    boards_file.close()
-    print(level)
-    print(boards[level].keys())
+
     board = boards[level]["board"]
     SOLUTION = boards[level]["solution"]
 
@@ -45,7 +46,7 @@ def play_window(level):
     window = tk.Tk()
     window.title(f"Soduko {level}")
     # set size and position of the window
-    WINDOW_WIDTH = 550
+    WINDOW_WIDTH = 600
     WINDOW_HEIGHT = 450
     # get dimantions of screen
     SCREEN_WIDTH = main_window.winfo_screenwidth()
@@ -102,17 +103,12 @@ def play_window(level):
             index_column += 1
         index_row +=1
 
-boards_file = open("./boards.json")
-boards = json.load(boards_file)
-boards_file.close()
-boards_length = len(boards)
-
 # make the main window 
 main_window = tk.Tk()
 main_window.title("Soduko")
 # set size and position of the window
-MAIN_WINDOW_WIDTH = 250 + (boards_length * 3)
-MAIN_WINDOW_HEIGHT = 125 + (boards_length ** 2)
+MAIN_WINDOW_WIDTH = 250 + (boards_length ** 2)
+MAIN_WINDOW_HEIGHT = 135 + (boards_length ** 2)
 # get dimantions of screen
 SCREEN_WIDTH = main_window.winfo_screenwidth()
 SCREEN_HEIGHT = main_window.winfo_screenheight()
@@ -140,7 +136,7 @@ for column_index_ in range(boards_length):
         column += 1
 
     level_button = tk.Button(main_window, text = level, command = lambda level = level: play_window(level))
-    level_button.grid(row = row_, column = column , padx = (5, 2), pady = (15,1))
+    level_button.grid(row = row_, column = column , padx = (25, 2), pady = (15,1))
     if column == 2:
         row_ += 2
 
