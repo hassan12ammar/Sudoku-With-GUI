@@ -4,7 +4,6 @@
 # box formed of 3X3 square there is 9 boxes in the game
 # each box has same rulls as columns and rows
 
-from os import path
 import tkinter as tk
 from tkinter.constants import DISABLED, TOP
 import json
